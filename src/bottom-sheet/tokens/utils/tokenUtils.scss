@@ -2,15 +2,12 @@
 :root {
   --bottom-enter-easing: cubic-bezier(.165, .84, .44, 1);
   --bottom-exit-easing: cubic-bezier(.165, .84, .44, 1);
-  --bottom-sheet-enter-duration: 250ms;
-  --bottom-sheet-exit-duration: 150ms;
+  --bottom-sheet-enter-duration: 200ms;
+  --bottom-sheet-exit-duration: 100ms;
   --bottom-sheet-overlay-enter-duration: 300ms;
   --bottom-sheet-overlay-enter-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
-  --bottom-sheet-overlay-exit-duration: 200ms;
+  --bottom-sheet-overlay-exit-duration: 250ms;
   --bottom-sheet-overlay-exit-easing: cubic-bezier(.165, .84, .44, 1);
-  --spring-damping-high: 22.22;
-  --spring-mass-default: 1;
-  --spring-stiffness-medium: 230;
 }
 // SCSS переменные для удобного использования
 $BOTTOM_ENTER_EASING: var(--bottom-enter-easing);
@@ -21,6 +18,3 @@ $BOTTOM_SHEET_OVERLAY_ENTER_DURATION: var(--bottom-sheet-overlay-enter-duration)
 $BOTTOM_SHEET_OVERLAY_ENTER_EASING: var(--bottom-sheet-overlay-enter-easing);
 $BOTTOM_SHEET_OVERLAY_EXIT_DURATION: var(--bottom-sheet-overlay-exit-duration);
 $BOTTOM_SHEET_OVERLAY_EXIT_EASING: var(--bottom-sheet-overlay-exit-easing);
-$SPRING_DAMPING_HIGH: var(--spring-damping-high);
-$SPRING_MASS_DEFAULT: var(--spring-mass-default);
-$SPRING_STIFFNESS_MEDIUM: var(--spring-stiffness-medium);
