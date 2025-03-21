@@ -10,11 +10,11 @@
 
 .bottom-sheet {
   transition-property: transform;
-  transition-duration: $BOTTOM_SHEET_EXIT_DURATION;
-  transition-timing-function: $BOTTOM_SHEET_EXIT_EASING;
+  transition-duration: $BOTTOM_SHEET_ENTER_DURATION;
+  transition-timing-function: $BOTTOM_ENTER_EASING;
 }
 
-/* Стили для AnimatePresence и exit анимации */
+/* Стили для анимации скрытия */
 .bottom-sheet-exit-active .bottom-sheet-overlay {
   transition-duration: $BOTTOM_SHEET_OVERLAY_EXIT_DURATION;
   transition-timing-function: $BOTTOM_SHEET_OVERLAY_EXIT_EASING;
@@ -22,5 +22,5 @@
 
 .bottom-sheet-exit-active .bottom-sheet {
   transition-duration: $BOTTOM_SHEET_EXIT_DURATION;
-  transition-timing-function: $BOTTOM_SHEET_EXIT_EASING;
+  transition-timing-function: $BOTTOM_EXIT_EASING;
 } 

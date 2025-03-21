@@ -24,8 +24,10 @@ const parseTokenValue = (value) => {
 
 // Processed tokens generated from component/tokens.json
 const processedTokens = {
-  "BOTTOM_SHEET_EXIT_DURATION": "300ms",
-  "BOTTOM_SHEET_EXIT_EASING": "cubic-bezier(.165, .84, .44, 1)",
+  "BOTTOM_SHEET_ENTER_DURATION": "250ms",
+  "BOTTOM_SHEET_EXIT_DURATION": "150ms",
+  "BOTTOM_ENTER_EASING": "cubic-bezier(.165, .84, .44, 1)",
+  "BOTTOM_EXIT_EASING": "cubic-bezier(.165, .84, .44, 1)",
   "BOTTOM_SHEET_OVERLAY_ENTER_DURATION": "300ms",
   "BOTTOM_SHEET_OVERLAY_ENTER_EASING": "cubic-bezier(0.25, 0.1, 0.25, 1)",
   "BOTTOM_SHEET_OVERLAY_EXIT_DURATION": "200ms",

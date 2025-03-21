@@ -1,14 +1,39 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, easeInOut, easeOut } from 'framer-motion';
 import '../index.css';
 import './styles/bottom-sheet.scss';
 import './styles/animation.scss';
+import tokens from './tokens/utils/tokenUtils';
 
 const BottomSheet = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openBottomSheet = () => setIsOpen(true);
   const closeBottomSheet = () => setIsOpen(false);
+  
+  // Запасная функция для преобразования длительности
+  const msToSeconds = (duration) => {
+    if (typeof duration === 'string') {
+      const match = duration.match(/^(\d+)ms$/);
+      if (match && match[1]) {
+        return parseFloat(match[1]) / 1000;
+      }
+    }
+    return 0.3; // Значение по умолчанию если ничего не сработало
+  };
+  
+  // Безопасное использование функции преобразования времени
+  const convertDuration = (duration) => {
+    try {
+      if (tokens.durationToSeconds && typeof tokens.durationToSeconds === 'function') {
+        return tokens.durationToSeconds(duration);
+      }
+      return msToSeconds(duration);
+    } catch (e) {
+      console.error('Error converting duration:', e);
+      return 0.3; // Значение по умолчанию
+    }
+  };
 
   // Варианты анимации для bottom sheet
   const sheetVariants = {
@@ -16,16 +41,15 @@ const BottomSheet = () => {
     visible: { 
       y: 0,
       transition: { 
-        type: "spring", 
-        damping: 22, 
-        stiffness: 230 
+        duration: convertDuration(tokens.BOTTOM_SHEET_ENTER_DURATION),
+        ease: easeInOut
       } 
     },
     exit: { 
       y: "100%",
       transition: { 
-        duration: 0.3,
-        ease: "easeOut"
+        duration: convertDuration(tokens.BOTTOM_SHEET_EXIT_DURATION),
+        ease: easeOut
       }
     }
   };
@@ -36,15 +60,15 @@ const BottomSheet = () => {
     visible: { 
       opacity: 1,
       transition: { 
-        duration: 0.3,
-        ease: "easeInOut"
+        duration: convertDuration(tokens.BOTTOM_SHEET_OVERLAY_ENTER_DURATION),
+        ease: easeInOut
       } 
     },
     exit: { 
       opacity: 0,
       transition: { 
-        duration: 0.2,
-        ease: "easeOut"
+        duration: convertDuration(tokens.BOTTOM_SHEET_OVERLAY_EXIT_DURATION),
+        ease: easeOut
       }
     }
   };
@@ -98,7 +122,7 @@ const BottomSheet = () => {
                   <div className="bottom-sheet-content">
                     <div style={{ padding: '0 24px 24px', color: '#333' }}>
                       <p>Это содержимое Bottom Sheet. Здесь может быть любая информация или интерактивные элементы.</p>
-                      <p>Вы можете закрыть этот Bottom Sheet, нажав на одну из кнопок внизу, кликнув по затемненной области или просто смахнув его вниз.</p>
+                      <p>Вы можете закрыть этот Bottom Sheet, нажав на кнопку подтверждения, кликнув по затемненной области или просто смахнув его вниз.</p>
                     </div>
                   </div>
                   
