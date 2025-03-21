@@ -7,13 +7,13 @@ import {
   SLIDER_ANIMATION,
 } from './scripts/animation.js';
 import '../index.css';
-import './styles/slider.scss';
+import './styles/bottom-sheet.scss';
 import './styles/animation.scss';
 import tokens from './tokens/utils/tokenUtils';
 
 
 
-const Slider = ({
+const BottomSheet = ({
   min = 0,
   max = 100,
   step = 1,
@@ -543,4 +543,4 @@ const Slider = ({
   return withInput ? renderWithInput() : renderWithoutInput();
 };
 
-export default Slider;
+export default BottomSheet;

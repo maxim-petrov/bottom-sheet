@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
-import Slider from './bottom-sheet/Slider';
+import BottomSheet from './bottom-sheet/BottomSheet.jsx';
 import rootTokens from './tokens.json';
 import componentTokens from './bottom-sheet/tokens/tokens.json';
 import tokenDescriptions from './bottom-sheet/tokens/tokenDescriptions';
@@ -254,7 +254,7 @@ function App() {
   return (
     <>
       <ErrorBoundary>
-        <Slider customTokens={tokenValues} defaultValue={55} withInput={false} active={true} showCounter={true}/>
+        <BottomSheet customTokens={tokenValues} defaultValue={55} withInput={false} active={true} showCounter={true}/>
       </ErrorBoundary>
       
       <div className="tokens-configurator">

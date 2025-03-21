@@ -25,7 +25,7 @@ const tokenDescriptions = {
   "COUNTER_TRANSITION_DURATION": "__HIDDEN__",
   "COUNTER_TRANSITION_EASING": "__HIDDEN__",
   
-  // Общие токены слайдера (Slider)
+  // Общие токены слайдера (BottomSheet)
   "SLIDER_ANIMATION_DURATION": "__HIDDEN__",
   "SLIDER_TRANSITION_DURATION": "Скорость движения ползунка",
   "SLIDER_TRANSITION_EASING": "Плавность перехода слайдера - характер движения основных анимаций"
