@@ -110,22 +110,9 @@ const BottomSheet = () => {
                     <button 
                       className="btn-root-119-18-1-1 btn-primary-a30-18-1-1 btn-medium-fdc-18-1-1 btn-typeButtonReset-268-18-1-1" 
                       onClick={closeBottomSheet}
+                      style={{ margin: '0 auto' }}
                     >
                       <span className="btn-text-398-18-1-1">Подтвердить</span>
-                    </button>
-                    
-                    <button 
-                      className="btn-root-119-18-1-1 btn-secondary-f3f-18-1-1 btn-medium-fdc-18-1-1 btn-typeButtonReset-268-18-1-1" 
-                      onClick={closeBottomSheet}
-                    >
-                      <span className="btn-text-398-18-1-1">Отменить</span>
-                    </button>
-                    
-                    <button 
-                      className="btn-root-119-18-1-1 btn-tertiary-a1c-18-1-1 btn-medium-fdc-18-1-1 btn-typeButtonReset-268-18-1-1" 
-                      onClick={closeBottomSheet}
-                    >
-                      <span className="btn-text-398-18-1-1">Отложить</span>
                     </button>
                   </div>
                 </motion.div>
