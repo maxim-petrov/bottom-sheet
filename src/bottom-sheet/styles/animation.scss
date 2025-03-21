@@ -42,4 +42,28 @@
 /* Отключить переход в активном состоянии */
 .slider-root-80f-11-0-8.slider-active-c30-11-0-8 .slider-axisFill-f1d-11-0-8 {
   transition: $AXIS_FILL_ACTIVE_DURATION;
+}
+
+/* Стили анимации для bottom sheet */
+.bottom-sheet-overlay {
+  transition-property: opacity;
+  transition-duration: $BOTTOM_SHEET_OVERLAY_ENTER_DURATION;
+  transition-timing-function: $BOTTOM_SHEET_OVERLAY_ENTER_EASING;
+}
+
+.bottom-sheet {
+  transition-property: transform;
+  transition-duration: $BOTTOM_SHEET_EXIT_DURATION;
+  transition-timing-function: $BOTTOM_SHEET_EXIT_EASING;
+}
+
+/* Стили для AnimatePresence и exit анимации */
+.bottom-sheet-exit-active .bottom-sheet-overlay {
+  transition-duration: $BOTTOM_SHEET_OVERLAY_EXIT_DURATION;
+  transition-timing-function: $BOTTOM_SHEET_OVERLAY_EXIT_EASING;
+}
+
+.bottom-sheet-exit-active .bottom-sheet {
+  transition-duration: $BOTTOM_SHEET_EXIT_DURATION;
+  transition-timing-function: $BOTTOM_SHEET_EXIT_EASING;
 } 

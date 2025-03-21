@@ -5,8 +5,157 @@ import './styles/bottom-sheet.scss';
 import './styles/animation.scss';
 import tokens from './tokens/utils/tokenUtils';
 
+// Компонент содержимого BottomSheet
+const BottomSheetContent = ({ 
+  isOpen, 
+  onClose, 
+  title, 
+  subtitle, 
+  children, 
+  primaryButtonText, 
+  secondaryButtonText, 
+  tertiaryButtonText, 
+  onPrimaryButtonClick, 
+  onSecondaryButtonClick, 
+  onTertiaryButtonClick, 
+  containInDemoContainer 
+}) => {
+  const sheetRef = useRef(null);
+  
+  // Преобразование длительности в секунды для Framer Motion
+  const msToSeconds = (msValue) => {
+    if (typeof msValue === 'string') {
+      const match = msValue.match(/^(\d+)ms$/);
+      if (match && match[1]) {
+        return parseFloat(match[1]) / 1000;
+      }
+    }
+    return msValue;
+  };
+  
+  // Анимация для bottom sheet с использованием spring
+  const variants = {
+    open: {
+      y: 0,
+      transition: {
+        type: 'spring',
+        stiffness: tokens.SPRING_STIFFNESS_MEDIUM,
+        damping: tokens.SPRING_DAMPING_HIGH,
+        mass: tokens.SPRING_MASS_DEFAULT,
+      }
+    },
+    closed: {
+      y: '100%',
+      transition: {
+        duration: msToSeconds(tokens.BOTTOM_SHEET_EXIT_DURATION),
+        ease: tokens.BOTTOM_SHEET_EXIT_EASING,
+      }
+    }
+  };
+  
+  // Анимация для overlay
+  const overlayVariants = {
+    open: {
+      opacity: 1,
+      transition: {
+        duration: msToSeconds(tokens.BOTTOM_SHEET_OVERLAY_ENTER_DURATION),
+        ease: tokens.BOTTOM_SHEET_OVERLAY_ENTER_EASING
+      }
+    },
+    closed: {
+      opacity: 0,
+      transition: {
+        duration: msToSeconds(tokens.BOTTOM_SHEET_OVERLAY_EXIT_DURATION),
+        ease: tokens.BOTTOM_SHEET_OVERLAY_EXIT_EASING
+      }
+    }
+  };
+  
+  // Обработчик drag события для закрытия по свайпу вниз
+  const handleDragEnd = (event, info) => {
+    if (info.offset.y > 100) {
+      onClose();
+    }
+  };
+  
+  if (!isOpen) return null;
+  
+  return (
+    <div className={`bottom-sheet-container ${containInDemoContainer ? 'in-demo' : ''}`}>
+      <motion.div 
+        className="bottom-sheet-overlay"
+        initial="closed"
+        animate="open"
+        exit="closed"
+        variants={overlayVariants}
+        onClick={onClose}
+      />
+      
+      <motion.div 
+        className="bottom-sheet"
+        ref={sheetRef}
+        initial="closed"
+        animate="open"
+        exit="closed"
+        variants={variants}
+        drag="y"
+        dragConstraints={{ top: 0 }}
+        dragElastic={0.1}
+        onDragEnd={handleDragEnd}
+      >
+        <div className="bottom-sheet-handle" />
+        
+        <button className="bottom-sheet-close" onClick={onClose}>
+          <span className="bottom-sheet-close-icon">×</span>
+        </button>
+        
+        {(title || subtitle) && (
+          <div className="bottom-sheet-header">
+            {title && <h2 className="bottom-sheet-title">{title}</h2>}
+            {subtitle && <h3 className="bottom-sheet-subtitle">{subtitle}</h3>}
+          </div>
+        )}
+        
+        <div className="bottom-sheet-content">
+          {children}
+        </div>
+        
+        {(primaryButtonText || secondaryButtonText || tertiaryButtonText) && (
+          <div className="bottom-sheet-footer">
+            {primaryButtonText && (
+              <button 
+                className="btn-root-119-18-1-1 btn-primary-a30-18-1-1 btn-medium-fdc-18-1-1 btn-typeButtonReset-268-18-1-1" 
+                onClick={onPrimaryButtonClick}
+              >
+                <span className="btn-text-398-18-1-1">{primaryButtonText}</span>
+              </button>
+            )}
+            
+            {secondaryButtonText && (
+              <button 
+                className="btn-root-119-18-1-1 btn-secondary-f3f-18-1-1 btn-medium-fdc-18-1-1 btn-typeButtonReset-268-18-1-1" 
+                onClick={onSecondaryButtonClick}
+              >
+                <span className="btn-text-398-18-1-1">{secondaryButtonText}</span>
+              </button>
+            )}
+            
+            {tertiaryButtonText && (
+              <button 
+                className="btn-root-119-18-1-1 btn-tertiary-a1c-18-1-1 btn-medium-fdc-18-1-1 btn-typeButtonReset-268-18-1-1" 
+                onClick={onTertiaryButtonClick}
+              >
+                <span className="btn-text-398-18-1-1">{tertiaryButtonText}</span>
+              </button>
+            )}
+          </div>
+        )}
+      </motion.div>
+    </div>
+  );
+};
 
-const BottomSheetPage = () => {
+const BottomSheet = () => {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   const openBottomSheet = () => {
@@ -27,7 +176,7 @@ const BottomSheetPage = () => {
     >
       <h1>Bottom Sheet</h1>
       <div className="component-demo">
-        <div className="component-demo-inner" style={{ textAlign: 'center', position: 'relative', minHeight: '450px' }}>
+        <div className="component-demo-inner" style={{ textAlign: 'center', position: 'relative' }}>
           <button 
             className="btn-root-119-18-1-1 btn-primary-a30-18-1-1 btn-medium-fdc-18-1-1 btn-typeButtonReset-268-18-1-1" 
             onClick={openBottomSheet}
@@ -35,7 +184,7 @@ const BottomSheetPage = () => {
             <span className="btn-text-398-18-1-1">Открыть Bottom Sheet</span>
           </button>
           
-          <BottomSheet 
+          <BottomSheetContent 
             isOpen={isBottomSheetOpen}
             onClose={closeBottomSheet}
             title="Заголовок"
@@ -52,56 +201,11 @@ const BottomSheetPage = () => {
               <p>Это содержимое Bottom Sheet. Здесь может быть любая информация или интерактивные элементы.</p>
               <p>Вы можете закрыть этот Bottom Sheet, нажав на одну из кнопок внизу, кликнув по затемненной области или просто смахнув его вниз.</p>
             </div>
-          </BottomSheet>
+          </BottomSheetContent>
         </div>
-      </div>
-      <div className="component-description">
-        <h2 style={{ color: "#333" }}>Токены</h2>
-        <p style={{ color: "#333" }}>
-          Bottom Sheet использует следующие токены анимации:
-        </p>
-        <h3 style={{ color: "#333" }}>Анимация появления/исчезновения</h3>
-        <ul style={{ color: "#333" }}>
-          <li><code>Spring.Stiffness.Medium (230)</code> - средняя жесткость пружины для плавного появления</li>
-          <li><code>Spring.Damping.High (22.22)</code> - сильное затухание для минимальных колебаний</li>
-          <li><code>Spring.Mass.Default (1)</code> - стандартная масса для естественного движения</li>
-          <li>Для исчезновения: <code>Duration.M</code> и <code>Easing.Exit</code> для плавного ухода</li>
-        </ul>
-        
-        <h3 style={{ color: "#333" }}>Анимация overlay</h3>
-        <ul style={{ color: "#333" }}>
-          <li>Появление: <code>Duration.M</code> с <code>Easing.Entrance</code> для плавного появления</li>
-          <li>Исчезновение: <code>Duration.S</code> с <code>Easing.Exit</code> для быстрого исчезновения</li>
-        </ul>
-        
-        <h3 style={{ color: "#333" }}>Жесты и интерактивность</h3>
-        <ul style={{ color: "#333" }}>
-          <li>Перетаскивание вниз для закрытия с порогом 100px</li>
-          <li>Плавный возврат на место при недостаточном перетаскивании</li>
-          <li>Клик по overlay закрывает компонент</li>
-          <li>Кнопка в верхней части для удобного закрытия</li>
-        </ul>
-        
-        <h3 style={{ color: "#333" }}>Тип анимации</h3>
-        <p style={{ color: "#333" }}>
-          Структурная анимация - показывает изменение структуры интерфейса и помогает пользователю понять 
-          модальный характер взаимодействия. Spring-анимация обеспечивает плавное появление, создавая 
-          ощущение естественного движения элемента снизу вверх, как будто он имеет физическую массу и подчиняется законам физики.
-        </p>
-        
-        <h3 style={{ color: "#333" }}>Использование spring-анимации для BottomSheet</h3>
-        <p style={{ color: "#333" }}>
-          Bottom Sheet особенно выигрывает от использования spring-анимации, так как:
-        </p>
-        <ul style={{ color: "#333" }}>
-          <li><strong>Создает ощущение тяжести</strong> - компонент появляется с естественной инерцией</li>
-          <li><strong>Улучшает ментальную модель</strong> - движение соответствует ожиданиям пользователя от физического объекта</li>
-          <li><strong>Повышает осознанность</strong> - характер анимации подчеркивает модальную природу компонента</li>
-          <li><strong>Согласуется с жестами</strong> - пружинная анимация идеально сочетается с жестовым интерфейсом (перетаскивание)</li>
-        </ul>
       </div>
     </motion.div>
   );
 };
 
-export default BottomSheetPage; 
+export default BottomSheet; 
