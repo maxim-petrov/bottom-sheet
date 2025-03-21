@@ -90,10 +90,6 @@ const BottomSheet = () => {
                 >
                   <div className="bottom-sheet-handle" />
                   
-                  <button className="bottom-sheet-close" onClick={closeBottomSheet}>
-                    <span className="bottom-sheet-close-icon">×</span>
-                  </button>
-                  
                   <div className="bottom-sheet-header">
                     <h2 className="bottom-sheet-title">Заголовок</h2>
                     <h3 className="bottom-sheet-subtitle">Подзаголовок</h3>
