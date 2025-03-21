@@ -254,7 +254,7 @@ function App() {
   return (
     <>
       <ErrorBoundary>
-        <BottomSheet customTokens={tokenValues} defaultValue={55} withInput={false} active={true} showCounter={true}/>
+        <BottomSheet />
       </ErrorBoundary>
       
       <div className="tokens-configurator">
