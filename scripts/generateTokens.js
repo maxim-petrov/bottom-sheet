@@ -3,10 +3,10 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // Пути к файлам
-const COMPONENT_TOKENS_PATH = path.resolve('src/slider-input/tokens/tokens.json');
+const COMPONENT_TOKENS_PATH = path.resolve('src/bottom-sheet/tokens/tokens.json');
 const ROOT_TOKENS_PATH = path.resolve('src/tokens.json');
-const JS_UTILS_PATH = path.resolve('src/slider-input/tokens/utils/tokenUtils.js');
-const SCSS_UTILS_PATH = path.resolve('src/slider-input/tokens/utils/tokenUtils.scss');
+const JS_UTILS_PATH = path.resolve('src/bottom-sheet/tokens/utils/tokenUtils.js');
+const SCSS_UTILS_PATH = path.resolve('src/bottom-sheet/tokens/utils/tokenUtils.scss');
 
 // Функция для генерации файлов с токенами
 export async function generateTokenFiles() {
@@ -15,7 +15,7 @@ export async function generateTokenFiles() {
     const rootTokens = JSON.parse(fs.readFileSync(ROOT_TOKENS_PATH, 'utf8'));
     const componentTokens = JSON.parse(fs.readFileSync(COMPONENT_TOKENS_PATH, 'utf8'));
     
-    // Обрабатываем токены из slider-input/tokens.json
+    // Обрабатываем токены из bottom-sheet/tokens.json
     const processedTokens = {};
     
     // Обрабатываем строки вида "tokens.duration('50')" и другие форматы токенов

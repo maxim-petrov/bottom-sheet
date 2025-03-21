@@ -260,8 +260,8 @@ const Slider = ({
 
     // Проверяем, что клик не был на самой метке значения
     if (
-      e.target.className.includes('slider-input-valueHint-1ed-11-0-8') ||
-      e.target.className.includes('slider-input-hintText-eb7-11-0-8')
+      e.target.className.includes('bottom-sheet-valueHint-1ed-11-0-8') ||
+      e.target.className.includes('bottom-sheet-hintText-eb7-11-0-8')
     ) {
       return;
     }
@@ -310,7 +310,7 @@ const Slider = ({
       <div style={{ width: '282px' }}>
         <div
           className={`slider-inputRoot-bee-11-0-8 ${
-            isDragging ? 'slider-input-dragging-input' : ''
+            isDragging ? 'bottom-sheet-dragging-input' : ''
           }`}
           data-e2e-id="slider"
         >

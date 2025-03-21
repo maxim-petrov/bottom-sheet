@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
-import Slider from './slider-input/Slider';
+import Slider from './bottom-sheet/Slider';
 import rootTokens from './tokens.json';
-import componentTokens from './slider-input/tokens/tokens.json';
-import tokenDescriptions from './slider-input/tokens/tokenDescriptions';
+import componentTokens from './bottom-sheet/tokens/tokens.json';
+import tokenDescriptions from './bottom-sheet/tokens/tokenDescriptions';
 
-// Simple error boundary slider-input
+// Simple error boundary bottom-sheet
 function ErrorBoundary({ children }) {
   const [hasError, setHasError] = useState(false);
   const [error, setError] = useState(null);
@@ -38,7 +38,7 @@ function ErrorBoundary({ children }) {
 }
 
 function App() {
-  // Загружаем токены динамически из slider-input/tokens.json
+  // Загружаем токены динамически из bottom-sheet/tokens.json
   const [tokenValues, setTokenValues] = useState(() => {
     // Преобразуем компонентные токены в начальное состояние
     const initialTokens = {};
@@ -93,7 +93,7 @@ function App() {
       // Также обновляем переменные в токенах для JS
       try {
         // Динамически импортируем tokenUtils для обновления значений на лету
-        import('./slider-input/tokens/utils/tokenUtils').then(module => {
+        import('./bottom-sheet/tokens/utils/tokenUtils').then(module => {
           if (module.default && typeof module.default.updateToken === 'function') {
             module.default.updateToken(key, value);
           }
