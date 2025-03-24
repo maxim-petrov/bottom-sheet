@@ -1,4 +1,3 @@
-// Определяем CSS переменные для токенов
 :root {
   --bottom-enter-easing: cubic-bezier(.165, .84, .44, 1);
   --bottom-exit-easing: cubic-bezier(.165, .84, .44, 1);
@@ -9,7 +8,6 @@
   --bottom-sheet-overlay-exit-duration: 250ms;
   --bottom-sheet-overlay-exit-easing: cubic-bezier(.165, .84, .44, 1);
 }
-// SCSS переменные для удобного использования
 $BOTTOM_ENTER_EASING: var(--bottom-enter-easing);
 $BOTTOM_EXIT_EASING: var(--bottom-exit-easing);
 $BOTTOM_SHEET_ENTER_DURATION: var(--bottom-sheet-enter-duration);

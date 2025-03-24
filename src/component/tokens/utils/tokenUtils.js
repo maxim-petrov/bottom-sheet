@@ -1,20 +1,17 @@
 import rootTokens from '../../../tokens.json';
 
-// Создаем функцию для корректной обработки любых пользовательских значений
 const parseTokenValue = (value) => {
   if (typeof value !== 'string') {
     return value;
   }
   
-  // Преобразуем миллисекунды в числовое значение, если это нужно
   if (value.endsWith('ms')) {
     const match = value.match(/^(\d+)ms$/);
     if (match) {
-      return value; // Оставляем как есть для CSS
+      return value; 
     }
   }
   
-  // Проверяем, это cubic-bezier или нет
   if (value.startsWith('cubic-bezier')) {
     return value;
   }
@@ -22,7 +19,6 @@ const parseTokenValue = (value) => {
   return value;
 };
 
-// Processed tokens generated from component/tokens.json
 const processedTokens = {
   "BOTTOM_SHEET_ENTER_DURATION": "200ms",
   "BOTTOM_SHEET_EXIT_DURATION": "100ms",
@@ -34,7 +30,6 @@ const processedTokens = {
   "BOTTOM_SHEET_OVERLAY_EXIT_EASING": "cubic-bezier(.165, .84, .44, 1)"
 };
 
-// Метод для обновления токенов на лету
 processedTokens.updateToken = function(tokenName, tokenValue) {
   if (this.hasOwnProperty(tokenName)) {
     this[tokenName] = parseTokenValue(tokenValue);
@@ -43,7 +38,6 @@ processedTokens.updateToken = function(tokenName, tokenValue) {
   return false;
 };
 
-// Log for debugging
 console.log('TokenUtils loaded with values:', processedTokens);
 
 export default processedTokens;
