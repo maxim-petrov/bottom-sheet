@@ -8,4 +8,5 @@ export default defineConfig({
     tokensPlugin(),
     react()
   ],
+  base: '/bottom-sheet/',
 })
